@@ -70,3 +70,31 @@ data "archive_file" "zipped_code" {
   source_file = "${path.module}/../lambdacode/lambda_function.py"
   output_path = "${path.module}/../lambdacode/lambda_function_payload.zip"
 }
+
+# Adding S3 bucket as trigger to my lambda and giving the permissions
+resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
+  bucket =var.bucket_id_for_s3
+
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.lambda_aws.arn
+    events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
+
+  }
+}
+# Adding S3 bucket as trigger to my lambda and giving the permissions
+resource "aws_lambda_permission" "test" {
+  statement_id  = "AllowS3Invoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda_aws.function_name
+  principal     = "s3.amazonaws.com"
+  source_arn    = "arn:aws:s3:::${var.bucket_id_for_s3}"
+}
+
+
+# resource "aws_s3_bucket" "s3_for_trigger" {
+#   bucket = "group4-lamba-s3-bucket"
+#   tags = {
+#       "Name" : "s3-for-github-trigger",
+#       "Environment":"dev" 
+#     }
+# }
