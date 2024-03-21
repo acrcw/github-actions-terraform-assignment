@@ -1,4 +1,4 @@
 output "data" {
-    value=module.lambda.data_block_output
-  
+  value = module.lambda.data_block_output
+
 }
