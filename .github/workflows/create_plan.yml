@@ -9,7 +9,7 @@ on:
 #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 jobs:
   terraform_init:
-    name: Deploy Site
+    name: Create a plan
     runs-on: ubuntu-latest
     defaults:
         run:
