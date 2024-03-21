@@ -41,6 +41,7 @@ resource "aws_iam_role" "iam_for_lambda" {
   name               = "role_for_lambda"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
+
 # Define the log group
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name              = "/aws/lambda/${var.lamba_function_name}"
@@ -90,11 +91,3 @@ resource "aws_lambda_permission" "test" {
   source_arn    = "arn:aws:s3:::${var.bucket_id_for_s3}"
 }
 
-
-# resource "aws_s3_bucket" "s3_for_trigger" {
-#   bucket = "group4-lamba-s3-bucket"
-#   tags = {
-#       "Name" : "s3-for-github-trigger",
-#       "Environment":"dev" 
-#     }
-# }

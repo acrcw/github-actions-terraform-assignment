@@ -2,7 +2,7 @@ import boto3
 import json
 from datetime import datetime
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('lamda_s3_info')
+table = dynamodb.Table('lamda_s3_info_logging_table')
 
 def lambda_handler(event, context):
     for record in event['Records']:

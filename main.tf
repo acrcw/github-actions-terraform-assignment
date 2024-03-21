@@ -10,5 +10,10 @@ module "s3" {
       "Name" : "s3-for-github-trigger",
       "Environment":"dev" 
     }
+}
+
+module "dynamodb" {
+    source = "./dynamodb"
+    lambda_role_id=module.lambda.iam_for_lambda_id
 
 }
