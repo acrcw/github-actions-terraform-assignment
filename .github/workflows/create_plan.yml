@@ -1,4 +1,4 @@
-name: worflow for generation a plan
+name: worflow to generate a plan
 on:
   push:
 

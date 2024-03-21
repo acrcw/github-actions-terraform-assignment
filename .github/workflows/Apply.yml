@@ -1,4 +1,4 @@
-name: worflow for applying the plan
+name: worflow to apply the plan
 on:
   workflow_dispatch: # gives a button in github ui to run the workflow
 # env:
