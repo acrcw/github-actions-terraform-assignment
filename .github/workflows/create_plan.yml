@@ -1,6 +1,5 @@
 name: worflow for generation a plan
 on:
-  # workflow_dispatch: # gives a button in github ui to run the workflow
   pull_request:
     branches:
       - main
