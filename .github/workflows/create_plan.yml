@@ -1,6 +1,6 @@
 name: worflow for generation a plan
 on:
-  pull_request:
+  push:
 
 # env:
 #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
