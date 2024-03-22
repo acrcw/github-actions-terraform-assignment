@@ -1,15 +1,15 @@
 variable "lambda_role_id" {
-    type=string  
+  type = string
 }
 variable "table_name" {
-    type=string 
+  type = string
 }
 variable "table_partion_key" {
-    type=string 
+  type = string
 }
 variable "role_name_for_dynamo_db_access" {
-    type=string 
+  type = string
 }
 variable "tabletags" {
-    type=map(any) 
+  type = map(any)
 }

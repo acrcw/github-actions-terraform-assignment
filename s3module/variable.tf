@@ -1,10 +1,10 @@
 variable "tags" {
-    type=map(any)
-      
+  type = map(any)
+
 }
 
 variable "bucket_name" {
-    type=string
-      
+  type = string
+
 }
 

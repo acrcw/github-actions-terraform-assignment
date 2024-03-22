@@ -14,25 +14,25 @@ resource "aws_dynamodb_table" "dynamodb-table" {
 }
 
 resource "aws_iam_role_policy" "lambda-dynamodb-access" {
-   name = var.role_name_for_dynamo_db_access
-   role = var.lambda_role_id
-   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "dynamodb:BatchGetItem",
-                "dynamodb:GetItem",
-                "dynamodb:Query",
-                "dynamodb:Scan",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PutItem",
-                "dynamodb:DeleteItem",
-                
-            ],
-            "Resource": "${aws_dynamodb_table.dynamodb-table.arn}"
-        }
+  name = var.role_name_for_dynamo_db_access
+  role = var.lambda_role_id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:BatchGetItem",
+          "dynamodb:GetItem",
+          "dynamodb:Query",
+          "dynamodb:Scan",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+
+        ],
+        "Resource" : "${aws_dynamodb_table.dynamodb-table.arn}"
+      }
     ]
-})
+  })
 }
