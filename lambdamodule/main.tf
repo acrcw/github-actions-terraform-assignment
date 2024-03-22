@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "assume_role" {
 
 # Define the IAM policy that allows lambda to create log streams and put log events
 resource "aws_iam_policy" "cloudwatch_log_policy" {
-  name   = "function-logging-policy"
+  name   = var.cloudwatch_logging_policy_name
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -30,15 +30,15 @@ resource "aws_iam_policy" "cloudwatch_log_policy" {
 }
 
 # Attach the policy to the IAM role created in step 1, by creating new resource 'aws_iam_role_policy_attachment'
-resource "aws_iam_role_policy_attachment" "cloudwatch_log_policy" {
-  role       = aws_iam_role.iam_for_lambda.id
+resource "aws_iam_role_policy_attachment" "cloudwatch_log_policy_attachment" {
+  role       = aws_iam_role.iam_role_for_lambda.id
   policy_arn = aws_iam_policy.cloudwatch_log_policy.arn
 }
 
 
 # Define the IAM role for lambda:
-resource "aws_iam_role" "iam_for_lambda" {
-  name               = "role_for_lambda"
+resource "aws_iam_role" "iam_role_for_lambda" {
+  name               = var.iam_role_name_lambda
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -56,7 +56,7 @@ resource "aws_lambda_function" "lambda_aws" {
   # path.module in the filename.
   filename      = "${path.module}/../lambdacode/lambda_function_payload.zip"
   function_name = var.lamba_function_name
-  role          = aws_iam_role.iam_for_lambda.arn
+  role          = aws_iam_role.iam_role_for_lambda.arn
   handler       = "lambda_function.lambda_handler"
   depends_on    = [aws_cloudwatch_log_group.lambda_log_group]
   source_code_hash = data.archive_file.zipped_code.output_base64sha256
